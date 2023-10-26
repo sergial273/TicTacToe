@@ -47,10 +47,7 @@ public class TresEnRaya extends JFrame {
         etiqueta7 = new JLabel("Tipo");
         radioHumano2 = new JRadioButton("Humano",true);
         radioCPU2 = new JRadioButton("CPU");
-       
-        radioHumano2 = new JRadioButton("Humano");
-        radioCPU2 = new JRadioButton("CPU");
-
+        
         ButtonGroup tipo = new ButtonGroup();
         tipo.add(radioHumano2);
         tipo.add(radioCPU2);
@@ -71,10 +68,8 @@ public class TresEnRaya extends JFrame {
             }
         };
         botonNuevaPartida.addActionListener(reiniciar);
-
         radioCPU2.addActionListener(reiniciar);
         radioHumano2.addActionListener(reiniciar);
-
         
         // Agregar los componentes al panel lateral
         panelLateral.add(botonNuevaPartida);
@@ -115,9 +110,6 @@ public class TresEnRaya extends JFrame {
 		            @Override
 		            public void actionPerformed(ActionEvent e) { 
 		            	
-		            	if (!radioCPU2.isSelected()) {
-		            		
-		            	}
 		            	//Saber que boton se ha pulsado en el array
 		            	JButton boton_act = (JButton) e.getSource();
 		            	
