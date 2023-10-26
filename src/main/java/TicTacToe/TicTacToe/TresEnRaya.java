@@ -1,6 +1,7 @@
 package TicTacToe.TicTacToe;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -16,11 +17,12 @@ public class TresEnRaya extends JFrame {
 	
 	public TresEnRaya() {
 		setTitle("TicTacToe");
-        setBounds(400,300,600,600);
+        setBounds(400,300,900,600);
         
         // Panel lateral
         JPanel panelLateral = new JPanel();
         panelLateral.setLayout(new BoxLayout(panelLateral, BoxLayout.Y_AXIS));
+        
         JButton botonNuevaPartida = new JButton("Nueva partida");
         JLabel etiqueta1 = new JLabel("");
         JLabel etiqueta2 = new JLabel("Jugador 1");
@@ -72,6 +74,8 @@ public class TresEnRaya extends JFrame {
 			for (int col = 0; col < 3; col++) {
 				tablero[fila][col] = new JButton("");
 				tablero[fila][col].setFont(new Font("Times New Roman", Font.PLAIN, 45));
+				tablero[fila][col].setBackground(new Color(224,224,224));
+
 				
 				ActionListener Act_Boton = new ActionListener() {
 		            @Override
