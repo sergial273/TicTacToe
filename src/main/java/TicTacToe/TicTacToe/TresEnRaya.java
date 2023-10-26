@@ -1,5 +1,7 @@
 package TicTacToe.TicTacToe;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -13,15 +15,87 @@ public class TresEnRaya extends JFrame {
 	private JButton[][] tablero;
 	private String turno = "X";
 	
+	JButton botonNuevaPartida;
+    JLabel etiqueta1;
+    JLabel etiqueta2;
+    JLabel etiqueta3;
+    JTextField campoTexto1;
+    
+    JLabel etiqueta5;
+    JLabel etiqueta6;
+    JTextField campoTexto2;
+    JLabel etiqueta7;
+    JRadioButton radioHumano2;
+    JRadioButton radioCPU2;
+    
 	public TresEnRaya() {
-		 setTitle("TicTacToe");
+		setTitle("TicTacToe");
         setBounds(400,300,600,600);
+        
+        // Panel lateral
+        JPanel panelLateral = new JPanel();
+        panelLateral.setLayout(new BoxLayout(panelLateral, BoxLayout.Y_AXIS));
+        
+        botonNuevaPartida = new JButton("Nueva partida");
+        etiqueta1 = new JLabel("ESTO ES EL TE");
+        etiqueta2 = new JLabel("Jugador 1");
+        etiqueta3 = new JLabel("Nombre");
+        campoTexto1 = new JTextField();
+        etiqueta5 = new JLabel("Jugador 2");
+        etiqueta6 = new JLabel("Nombre");
+        campoTexto2 = new JTextField();
+        etiqueta7 = new JLabel("Tipo");
+        radioHumano2 = new JRadioButton("Humano",true);
+        radioCPU2 = new JRadioButton("CPU");
+        
+        ButtonGroup tipo = new ButtonGroup();
+        tipo.add(radioHumano2);
+        tipo.add(radioCPU2);
+        
+        etiqueta1.setText(campoTexto1.getText()+ ", coloca ficha...");
+        
+        //creamos la accion para reiniciar la partida
+        ActionListener reiniciar = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) { 
+            	reiniciarPartida();
+            	if(turno.equals("X")) {
+            		turno = "O";
+            	}
+            	else {
+            		turno = "X";
+            	}
+            }
+        };
+        botonNuevaPartida.addActionListener(reiniciar);
+        radioCPU2.addActionListener(reiniciar);
+        radioHumano2.addActionListener(reiniciar);
+        
+        // Agregar los componentes al panel lateral
+        panelLateral.add(botonNuevaPartida);
+        panelLateral.add(etiqueta1);
+        panelLateral.add(etiqueta2);
+        panelLateral.add(etiqueta3);
+        panelLateral.add(campoTexto1);
+        panelLateral.add(etiqueta5);
+        panelLateral.add(etiqueta6);
+        panelLateral.add(campoTexto2);
+        panelLateral.add(etiqueta7);
+        panelLateral.add(radioHumano2);
+        panelLateral.add(radioCPU2);
+
+        // Agregar el panel lateral y el panel de juego al marco principal
+        add(panelLateral, BorderLayout.EAST);
+        JPanel panelJuego = new JPanel();
+        panelJuego.setLayout(new GridLayout(3, 3));
+        iniciarTabla(panelJuego);
+        add(panelJuego, BorderLayout.CENTER);
+        
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new GridLayout(3, 3));
-        iniciarTabla();
+
 	}
 	
-	private void iniciarTabla() {
+	private void iniciarTabla(JPanel panelJuego) {
 		
 		tablero = new JButton[3][3];
 		
@@ -29,6 +103,8 @@ public class TresEnRaya extends JFrame {
 			for (int col = 0; col < 3; col++) {
 				tablero[fila][col] = new JButton("");
 				tablero[fila][col].setFont(new Font("Times New Roman", Font.PLAIN, 45));
+				tablero[fila][col].setBackground(new Color(224,224,224));
+
 				
 				ActionListener Act_Boton = new ActionListener() {
 		            @Override
@@ -38,7 +114,7 @@ public class TresEnRaya extends JFrame {
 		            	JButton boton_act = (JButton) e.getSource();
 		            	
 		                if(boton_act.getText().equals("") && !hay6Fichas()) {
-		                	//añadir la letra del jugador
+		                	//aÃ±adir la letra del jugador
 		                	boton_act.setText(turno);   	
 		                	
 		                	if(haGanado(turno)) {
@@ -61,18 +137,78 @@ public class TresEnRaya extends JFrame {
 		                		}
 		                	}
 		                }
+		                
+		                if (radioCPU2.isSelected() && turno.equals("O")) {
+		                	if(!hay6Fichas()) {
+		                		int fila = (int) (Math.floor(Math.random()*(2-0+1)+0));
+			                	int columna = (int) (Math.floor(Math.random()*(2-0+1)+0));
+			                	while(!tablero[fila][columna].getText().equals("")) {
+			                		fila = (int) (Math.floor(Math.random()*(2-0+1)+0));
+				                	columna = (int) (Math.floor(Math.random()*(2-0+1)+0));
+			                	}
+			                	tablero[fila][columna].setText("O");
+			                	if(turno.equals("X")) {
+			                		turno = "O";
+			                	}
+			                	else {
+			                		turno = "X";
+			                	}
+		                	}
+		                	else {
+		                		int fila = (int) (Math.floor(Math.random()*(2-0+1)+0));
+			                	int columna = (int) (Math.floor(Math.random()*(2-0+1)+0));
+			                	while(!tablero[fila][columna].getText().equals("O")) {
+			                		fila = (int) (Math.floor(Math.random()*(2-0+1)+0));
+				                	columna = (int) (Math.floor(Math.random()*(2-0+1)+0));
+			                	}
+			                	tablero[fila][columna].setText("");
+			                	fila = (int) (Math.floor(Math.random()*(2-0+1)+0));
+			                	columna = (int) (Math.floor(Math.random()*(2-0+1)+0));
+			                	while(!tablero[fila][columna].getText().equals("")) {
+			                		fila = (int) (Math.floor(Math.random()*(2-0+1)+0));
+				                	columna = (int) (Math.floor(Math.random()*(2-0+1)+0));
+			                	}
+			                	tablero[fila][columna].setText("O");
+			                	
+			                	if(turno.equals("X")) {
+			                		turno = "O";
+			                	}
+			                	else {
+			                		turno = "X";
+			                	}
+		                	}
+		                	if(haGanado(turno)) {
+		                		JOptionPane.showMessageDialog(null, "Enhorabuena! Ganaste.");
+		                		reiniciarPartida();
+		                	}
+		                	
+		                	if(turno.equals("X")) {
+		                		turno = "O";
+		                	}
+		                	else {
+		                		turno = "X";
+		                	}
+		                }
 		            }
 		        };
 		        
 				tablero[fila][col].addActionListener(Act_Boton);
 				
-				add(tablero[fila][col]);
+				panelJuego.add(tablero[fila][col]);
 				
 			}
 		}
 	}
 	
 	private boolean haGanado(String turno1) {
+		
+		if(turno.equals("X")) {
+			etiqueta1.setText(campoTexto2.getText()+ ", coloca ficha...");
+		}
+		else {
+			etiqueta1.setText(campoTexto1.getText()+ ", coloca ficha...");
+		}
+		
 		// Comprobar filas
         for (int fil = 0; fil < 3; fil++) {
         	if(tablero[fil][0].getText().equals(turno1) && tablero[fil][1].getText().equals(turno1) && tablero[fil][2].getText().equals(turno1)) {
@@ -116,6 +252,7 @@ public class TresEnRaya extends JFrame {
 	
 	private void reiniciarPartida() {
 		turno = "O";
+		etiqueta1.setText(campoTexto1.getText()+ ", coloca ficha...");
 		for (int fila = 0; fila < 3; fila++) {
 			for (int col = 0; col < 3; col++) {
 				tablero[fila][col].setText("");
