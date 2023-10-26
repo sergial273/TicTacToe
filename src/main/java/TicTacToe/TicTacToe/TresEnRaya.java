@@ -114,7 +114,7 @@ public class TresEnRaya extends JFrame {
 		            	JButton boton_act = (JButton) e.getSource();
 		            	
 		                if(boton_act.getText().equals("") && !hay6Fichas()) {
-		                	//aÃ±adir la letra del jugador
+		                	//añadir la letra del jugador
 		                	boton_act.setText(turno);   	
 		                	
 		                	if(haGanado(turno)) {
@@ -147,12 +147,7 @@ public class TresEnRaya extends JFrame {
 				                	columna = (int) (Math.floor(Math.random()*(2-0+1)+0));
 			                	}
 			                	tablero[fila][columna].setText("O");
-			                	if(turno.equals("X")) {
-			                		turno = "O";
-			                	}
-			                	else {
-			                		turno = "X";
-			                	}
+
 		                	}
 		                	else {
 		                		int fila = (int) (Math.floor(Math.random()*(2-0+1)+0));
@@ -170,12 +165,7 @@ public class TresEnRaya extends JFrame {
 			                	}
 			                	tablero[fila][columna].setText("O");
 			                	
-			                	if(turno.equals("X")) {
-			                		turno = "O";
-			                	}
-			                	else {
-			                		turno = "X";
-			                	}
+
 		                	}
 		                	if(haGanado(turno)) {
 		                		JOptionPane.showMessageDialog(null, "Enhorabuena! Ganaste.");
