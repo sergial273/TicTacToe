@@ -1,5 +1,6 @@
 package TicTacToe.TicTacToe;
 
+import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -14,14 +15,56 @@ public class TresEnRaya extends JFrame {
 	private String turno = "X";
 	
 	public TresEnRaya() {
-		 setTitle("TicTacToe");
+		setTitle("TicTacToe");
         setBounds(400,300,600,600);
+        
+        // Panel lateral
+        JPanel panelLateral = new JPanel();
+        panelLateral.setLayout(new BoxLayout(panelLateral, BoxLayout.Y_AXIS));
+        JButton botonNuevaPartida = new JButton("Nueva partida");
+        JLabel etiqueta1 = new JLabel("");
+        JLabel etiqueta2 = new JLabel("Jugador 1");
+        JLabel etiqueta3 = new JLabel("Nombre");
+        JTextField campoTexto1 = new JTextField();
+        JLabel etiqueta4 = new JLabel("Tipo");
+        JRadioButton radioHumano1 = new JRadioButton("Humano");
+        JRadioButton radioCPU1 = new JRadioButton("CPU");
+        JLabel etiqueta5 = new JLabel("Jugador 2");
+        JLabel etiqueta6 = new JLabel("Nombre");
+        JTextField campoTexto2 = new JTextField();
+        JLabel etiqueta7 = new JLabel("Tipo");
+        JRadioButton radioHumano2 = new JRadioButton("Humano");
+        JRadioButton radioCPU2 = new JRadioButton("CPU");
+
+        // Agregar los componentes al panel lateral
+        panelLateral.add(botonNuevaPartida);
+        panelLateral.add(etiqueta1);
+        panelLateral.add(etiqueta2);
+        panelLateral.add(etiqueta3);
+        panelLateral.add(campoTexto1);
+        panelLateral.add(etiqueta4);
+        panelLateral.add(radioHumano1);
+        panelLateral.add(radioCPU1);
+        panelLateral.add(etiqueta5);
+        panelLateral.add(etiqueta6);
+        panelLateral.add(campoTexto2);
+        panelLateral.add(etiqueta7);
+        panelLateral.add(radioHumano2);
+        panelLateral.add(radioCPU2);
+
+        // Agregar el panel lateral y el panel de juego al marco principal
+        add(panelLateral, BorderLayout.EAST);
+        JPanel panelJuego = new JPanel();
+        panelJuego.setLayout(new GridLayout(3, 3));
+        iniciarTabla(panelJuego);
+        add(panelJuego, BorderLayout.CENTER);
+        
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new GridLayout(3, 3));
-        iniciarTabla();
+        //setLayout(new GridLayout(3, 3));
+
 	}
 	
-	private void iniciarTabla() {
+	private void iniciarTabla(JPanel panelJuego) {
 		
 		tablero = new JButton[3][3];
 		
@@ -66,7 +109,7 @@ public class TresEnRaya extends JFrame {
 		        
 				tablero[fila][col].addActionListener(Act_Boton);
 				
-				add(tablero[fila][col]);
+				panelJuego.add(tablero[fila][col]);
 				
 			}
 		}
