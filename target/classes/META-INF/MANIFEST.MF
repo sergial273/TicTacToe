@@ -1,5 +1,10 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: Robert
 Build-Jdk: 17.0.3
+=======
+Built-By: ainar
+Build-Jdk: 17.0.8.1
+>>>>>>> 91d148040f8914a34d350cd96a0d1020b6480a96
 Created-By: Maven Integration for Eclipse
 
