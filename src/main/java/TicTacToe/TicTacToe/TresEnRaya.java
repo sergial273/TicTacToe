@@ -12,7 +12,6 @@ public class TresEnRaya extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JButton[][] tablero;
 	private String turno = "X";
-	private boolean pasadas6fichas = false;
 	
 	public TresEnRaya() {
 		 setTitle("TicTacToe");
@@ -38,16 +37,13 @@ public class TresEnRaya extends JFrame {
 		            	//Saber que boton se ha pulsado en el array
 		            	JButton boton_act = (JButton) e.getSource();
 		            	
-		                if(boton_act.getText().equals("") && !pasadas6fichas) {
+		                if(boton_act.getText().equals("") && !hay6Fichas()) {
 		                	//añadir la letra del jugador
 		                	boton_act.setText(turno);   	
 		                	
 		                	if(haGanado(turno)) {
 		                		JOptionPane.showMessageDialog(null, "Enhorabuena! Ganaste.");
 		                		reiniciarPartida();
-		                	}
-		                	else{
-		                		hay6Fichas();
 		                	}
 		                	
 		                	if(turno.equals("X")) {
@@ -59,8 +55,10 @@ public class TresEnRaya extends JFrame {
 		                			
 		                }
 		                else {
-		                	if(pasadas6fichas && boton_act.getText().equals(turno)) {
-		                		boton_act.setText("");
+							if (hay6Fichas()) {
+		                		if(boton_act.getText().equals(turno)) {
+		                			boton_act.setText("");
+		                		}
 		                	}
 		                }
 		            }
@@ -111,10 +109,8 @@ public class TresEnRaya extends JFrame {
 			}
 		}
 		if ((9-fichas)<6) {
-			pasadas6fichas = false;
 			return false;
 		}
-		pasadas6fichas = true;
 		return true;
 	}
 	
