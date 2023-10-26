@@ -15,38 +15,65 @@ public class TresEnRaya extends JFrame {
 	private JButton[][] tablero;
 	private String turno = "X";
 	
+	JButton botonNuevaPartida;
+    JLabel etiqueta1;
+    JLabel etiqueta2;
+    JLabel etiqueta3;
+    JTextField campoTexto1;
+    
+    JLabel etiqueta5;
+    JLabel etiqueta6;
+    JTextField campoTexto2;
+    JLabel etiqueta7;
+    JRadioButton radioHumano2;
+    JRadioButton radioCPU2;
+    
 	public TresEnRaya() {
 		setTitle("TicTacToe");
-        setBounds(400,300,900,600);
+        setBounds(400,300,600,600);
         
         // Panel lateral
         JPanel panelLateral = new JPanel();
         panelLateral.setLayout(new BoxLayout(panelLateral, BoxLayout.Y_AXIS));
         
-        JButton botonNuevaPartida = new JButton("Nueva partida");
-        JLabel etiqueta1 = new JLabel("");
-        JLabel etiqueta2 = new JLabel("Jugador 1");
-        JLabel etiqueta3 = new JLabel("Nombre");
-        JTextField campoTexto1 = new JTextField();
-        JLabel etiqueta4 = new JLabel("Tipo");
-        JRadioButton radioHumano1 = new JRadioButton("Humano");
-        JRadioButton radioCPU1 = new JRadioButton("CPU");
-        JLabel etiqueta5 = new JLabel("Jugador 2");
-        JLabel etiqueta6 = new JLabel("Nombre");
-        JTextField campoTexto2 = new JTextField();
-        JLabel etiqueta7 = new JLabel("Tipo");
-        JRadioButton radioHumano2 = new JRadioButton("Humano");
-        JRadioButton radioCPU2 = new JRadioButton("CPU");
-
+        botonNuevaPartida = new JButton("Nueva partida");
+        etiqueta1 = new JLabel("ESTO ES EL TE");
+        etiqueta2 = new JLabel("Jugador 1");
+        etiqueta3 = new JLabel("Nombre");
+        campoTexto1 = new JTextField();
+        etiqueta5 = new JLabel("Jugador 2");
+        etiqueta6 = new JLabel("Nombre");
+        campoTexto2 = new JTextField();
+        etiqueta7 = new JLabel("Tipo");
+        radioHumano2 = new JRadioButton("Humano");
+        radioCPU2 = new JRadioButton("CPU");
+        ButtonGroup tipo = new ButtonGroup();
+        tipo.add(radioHumano2);
+        tipo.add(radioCPU2);
+        
+        etiqueta1.setText(campoTexto1.getText()+ ", coloca ficha...");
+        
+        //creamos la accion para reiniciar la partida
+        ActionListener reiniciar = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) { 
+            	reiniciarPartida();
+            	if(turno.equals("X")) {
+            		turno = "O";
+            	}
+            	else {
+            		turno = "X";
+            	}
+            }
+        };
+        botonNuevaPartida.addActionListener(reiniciar);
+        
         // Agregar los componentes al panel lateral
         panelLateral.add(botonNuevaPartida);
         panelLateral.add(etiqueta1);
         panelLateral.add(etiqueta2);
         panelLateral.add(etiqueta3);
         panelLateral.add(campoTexto1);
-        panelLateral.add(etiqueta4);
-        panelLateral.add(radioHumano1);
-        panelLateral.add(radioCPU1);
         panelLateral.add(etiqueta5);
         panelLateral.add(etiqueta6);
         panelLateral.add(campoTexto2);
@@ -62,7 +89,6 @@ public class TresEnRaya extends JFrame {
         add(panelJuego, BorderLayout.CENTER);
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //setLayout(new GridLayout(3, 3));
 
 	}
 	
@@ -81,6 +107,9 @@ public class TresEnRaya extends JFrame {
 		            @Override
 		            public void actionPerformed(ActionEvent e) { 
 		            	
+		            	if (!radioCPU2.isSelected()) {
+		            		
+		            	}
 		            	//Saber que boton se ha pulsado en el array
 		            	JButton boton_act = (JButton) e.getSource();
 		            	
@@ -120,6 +149,14 @@ public class TresEnRaya extends JFrame {
 	}
 	
 	private boolean haGanado(String turno1) {
+		
+		if(turno.equals("X")) {
+			etiqueta1.setText(campoTexto2.getText()+ ", coloca ficha...");
+		}
+		else {
+			etiqueta1.setText(campoTexto1.getText()+ ", coloca ficha...");
+		}
+		
 		// Comprobar filas
         for (int fil = 0; fil < 3; fil++) {
         	if(tablero[fil][0].getText().equals(turno1) && tablero[fil][1].getText().equals(turno1) && tablero[fil][2].getText().equals(turno1)) {
@@ -163,6 +200,7 @@ public class TresEnRaya extends JFrame {
 	
 	private void reiniciarPartida() {
 		turno = "O";
+		etiqueta1.setText(campoTexto1.getText()+ ", coloca ficha...");
 		for (int fila = 0; fila < 3; fila++) {
 			for (int col = 0; col < 3; col++) {
 				tablero[fila][col].setText("");
