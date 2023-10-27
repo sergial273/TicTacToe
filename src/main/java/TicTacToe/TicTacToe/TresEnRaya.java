@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -35,6 +36,10 @@ public class TresEnRaya extends JFrame {
     private JSeparator separator_1;
     private JSeparator separator_2;
     private JEditorPane editorPane;
+    private JLabel lblNewLabel;
+    private JLabel lblNewLabel2;
+    private JLabel lblNewLabel3;
+    private JLabel lblNewLabel4;
     
 	public TresEnRaya() {
 		setTitle("TicTacToe");
@@ -135,6 +140,22 @@ public class TresEnRaya extends JFrame {
 		etiqueta1.setText(nom+ ", coloca ficha...");
         panelLateral.add(campoTexto1);
         
+        lblNewLabel = new JLabel();
+        lblNewLabel.setIcon(new ImageIcon(new ImageIcon("./Images/peque.png").getImage().getScaledInstance(158, 160, Image.SCALE_DEFAULT)));
+        lblNewLabel.setBounds(300, 51, 158, 160);
+        panelLateral.add(lblNewLabel);
+        
+        lblNewLabel2 = new JLabel();
+        lblNewLabel2.setIcon(new ImageIcon(new ImageIcon("./Images/peque.png").getImage().getScaledInstance(158, 160, Image.SCALE_DEFAULT)));
+        lblNewLabel2.setBounds(300, 100, 158, 160);
+        lblNewLabel2.setAlignmentX(RIGHT_ALIGNMENT);
+        panelLateral.add(lblNewLabel2);
+        
+        lblNewLabel3 = new JLabel();
+        lblNewLabel3.setIcon(new ImageIcon(new ImageIcon("./Images/peque.png").getImage().getScaledInstance(158, 160, Image.SCALE_DEFAULT)));
+        lblNewLabel3.setBounds(400, 51, 158, 160);
+        panelLateral.add(lblNewLabel3);
+        
         editorPane = new JEditorPane();
         editorPane.setBackground(new Color(95, 158, 160));
         editorPane.setEditable(false);
@@ -185,7 +206,7 @@ public class TresEnRaya extends JFrame {
 		                	boton_act.setText(turno);   	
 		                	
 		                	if(haGanado(turno)) {
-		                		JOptionPane.showMessageDialog(null, "Enhorabuena! Ganaste.");
+		                		JOptionPane.showMessageDialog(null, "¡Enhorabuena! Ganaste.");
 		                		reiniciarPartida();
 		                	}
 		                	
@@ -235,7 +256,7 @@ public class TresEnRaya extends JFrame {
 
 		                	}
 		                	if(haGanado(turno)) {
-		                		JOptionPane.showMessageDialog(null, "Enhorabuena! Ganaste.");
+		                		JOptionPane.showMessageDialog(null, "¡Enhorabuena! Ganaste.");
 		                		reiniciarPartida();
 		                	}
 		                	
