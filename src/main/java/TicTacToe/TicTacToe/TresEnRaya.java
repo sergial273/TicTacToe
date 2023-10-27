@@ -38,7 +38,7 @@ public class TresEnRaya extends JFrame {
     
 	public TresEnRaya() {
 		setTitle("TicTacToe");
-        setBounds(400,300,600,600);
+        setBounds(400,300,900,800);
         
         // Panel lateral
         JPanel panelLateral = new JPanel();
