@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
+import java.awt.Component;
+import java.awt.Dimension;
 
 public class TresEnRaya extends JFrame {
 	
@@ -34,19 +36,47 @@ public class TresEnRaya extends JFrame {
         
         // Panel lateral
         JPanel panelLateral = new JPanel();
+        panelLateral.setBackground(new Color(95, 158, 160));
         panelLateral.setLayout(new BoxLayout(panelLateral, BoxLayout.Y_AXIS));
         
         botonNuevaPartida = new JButton("Nueva partida");
+        botonNuevaPartida.setMaximumSize(new Dimension(120, 23));
+        botonNuevaPartida.setForeground(new Color(95, 158, 160));
+        botonNuevaPartida.setFont(new Font("Tempus Sans ITC", Font.BOLD, 14));
         etiqueta1 = new JLabel("ESTO ES EL TE");
+        etiqueta1.setForeground(new Color(224, 255, 255));
+        etiqueta1.setFont(new Font("Tempus Sans ITC", Font.BOLD, 14));
         etiqueta2 = new JLabel("Jugador 1");
+        etiqueta2.setAlignmentX(Component.RIGHT_ALIGNMENT);
+        etiqueta2.setForeground(new Color(255, 255, 255));
+        etiqueta2.setFont(new Font("Tempus Sans ITC", Font.BOLD, 14));
         etiqueta3 = new JLabel("Nombre");
+        etiqueta3.setForeground(new Color(255, 255, 255));
+        etiqueta3.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 11));
         campoTexto1 = new JTextField();
+        campoTexto1.setMaximumSize(new Dimension(17483647, 17483647));
+        campoTexto1.setAlignmentY(1.0f);
         etiqueta5 = new JLabel("Jugador 2");
+        etiqueta5.setAlignmentX(Component.RIGHT_ALIGNMENT);
+        etiqueta5.setForeground(new Color(240, 255, 255));
+        etiqueta5.setFont(new Font("Tempus Sans ITC", Font.BOLD, 14));
         etiqueta6 = new JLabel("Nombre");
+        etiqueta6.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 11));
+        etiqueta6.setForeground(new Color(255, 255, 255));
         campoTexto2 = new JTextField();
+        campoTexto2.setMaximumSize(new Dimension(17483647, 17483647));
         etiqueta7 = new JLabel("Tipo");
+        etiqueta7.setAlignmentX(Component.RIGHT_ALIGNMENT);
+        etiqueta7.setForeground(new Color(255, 255, 255));
+        etiqueta7.setFont(new Font("Tempus Sans ITC", Font.BOLD, 15));
         radioHumano2 = new JRadioButton("Humano",true);
+        radioHumano2.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 11));
+        radioHumano2.setForeground(new Color(240, 255, 240));
+        radioHumano2.setBackground(new Color(95, 158, 160));
         radioCPU2 = new JRadioButton("CPU");
+        radioCPU2.setForeground(new Color(240, 248, 255));
+        radioCPU2.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 11));
+        radioCPU2.setBackground(new Color(95, 158, 160));
         
         ButtonGroup tipo = new ButtonGroup();
         tipo.add(radioHumano2);
@@ -85,11 +115,11 @@ public class TresEnRaya extends JFrame {
         panelLateral.add(radioCPU2);
 
         // Agregar el panel lateral y el panel de juego al marco principal
-        add(panelLateral, BorderLayout.EAST);
+        getContentPane().add(panelLateral, BorderLayout.EAST);
         JPanel panelJuego = new JPanel();
         panelJuego.setLayout(new GridLayout(3, 3));
         iniciarTabla(panelJuego);
-        add(panelJuego, BorderLayout.CENTER);
+        getContentPane().add(panelJuego, BorderLayout.CENTER);
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
