@@ -10,6 +10,8 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Point;
+import java.awt.Cursor;
 
 public class TresEnRaya extends JFrame {
 	
@@ -29,6 +31,10 @@ public class TresEnRaya extends JFrame {
     JLabel etiqueta7;
     JRadioButton radioHumano2;
     JRadioButton radioCPU2;
+    private JSeparator separator;
+    private JSeparator separator_1;
+    private JSeparator separator_2;
+    private JEditorPane editorPane;
     
 	public TresEnRaya() {
 		setTitle("TicTacToe");
@@ -40,6 +46,7 @@ public class TresEnRaya extends JFrame {
         panelLateral.setLayout(new BoxLayout(panelLateral, BoxLayout.Y_AXIS));
         
         botonNuevaPartida = new JButton("Nueva partida");
+        botonNuevaPartida.setLocation(new Point(120, 300));
         botonNuevaPartida.setMaximumSize(new Dimension(120, 23));
         botonNuevaPartida.setForeground(new Color(95, 158, 160));
         botonNuevaPartida.setFont(new Font("Tempus Sans ITC", Font.BOLD, 14));
@@ -53,9 +60,6 @@ public class TresEnRaya extends JFrame {
         etiqueta3 = new JLabel("Nombre");
         etiqueta3.setForeground(new Color(255, 255, 255));
         etiqueta3.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 11));
-        campoTexto1 = new JTextField();
-        campoTexto1.setMaximumSize(new Dimension(17483647, 17483647));
-        campoTexto1.setAlignmentY(1.0f);
         etiqueta5 = new JLabel("Jugador 2");
         etiqueta5.setAlignmentX(Component.RIGHT_ALIGNMENT);
         etiqueta5.setForeground(new Color(240, 255, 255));
@@ -64,7 +68,7 @@ public class TresEnRaya extends JFrame {
         etiqueta6.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 11));
         etiqueta6.setForeground(new Color(255, 255, 255));
         campoTexto2 = new JTextField();
-        campoTexto2.setMaximumSize(new Dimension(17483647, 17483647));
+        campoTexto2.setMaximumSize(new Dimension(400, 150));
         etiqueta7 = new JLabel("Tipo");
         etiqueta7.setAlignmentX(Component.RIGHT_ALIGNMENT);
         etiqueta7.setForeground(new Color(255, 255, 255));
@@ -81,8 +85,6 @@ public class TresEnRaya extends JFrame {
         ButtonGroup tipo = new ButtonGroup();
         tipo.add(radioHumano2);
         tipo.add(radioCPU2);
-        
-        etiqueta1.setText(campoTexto1.getText()+ ", coloca ficha...");
         
         //creamos la accion para reiniciar la partida
         ActionListener reiniciar = new ActionListener() {
@@ -103,13 +105,33 @@ public class TresEnRaya extends JFrame {
         
         // Agregar los componentes al panel lateral
         panelLateral.add(botonNuevaPartida);
+        
+        separator_1 = new JSeparator();
+        separator_1.setMaximumSize(new Dimension(32779, 50000));
+        panelLateral.add(separator_1);
         panelLateral.add(etiqueta1);
+        
+        separator_2 = new JSeparator();
+        separator_2.setMaximumSize(new Dimension(32767, 50000));
+        panelLateral.add(separator_2);
         panelLateral.add(etiqueta2);
         panelLateral.add(etiqueta3);
+        campoTexto1 = new JTextField();
+        campoTexto1.setMaximumSize(new Dimension(400, 150));
+        campoTexto1.setAlignmentY(1.0f);
+        
+        etiqueta1.setText(campoTexto1.getText()+ ", coloca ficha...");
         panelLateral.add(campoTexto1);
+        
+        editorPane = new JEditorPane();
+        editorPane.setBackground(new Color(95, 158, 160));
+        panelLateral.add(editorPane);
         panelLateral.add(etiqueta5);
         panelLateral.add(etiqueta6);
         panelLateral.add(campoTexto2);
+        
+        separator = new JSeparator();
+        panelLateral.add(separator);
         panelLateral.add(etiqueta7);
         panelLateral.add(radioHumano2);
         panelLateral.add(radioCPU2);
@@ -117,6 +139,8 @@ public class TresEnRaya extends JFrame {
         // Agregar el panel lateral y el panel de juego al marco principal
         getContentPane().add(panelLateral, BorderLayout.EAST);
         JPanel panelJuego = new JPanel();
+        panelJuego.setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
+        panelJuego.setMinimumSize(new Dimension(32767, 32767));
         panelJuego.setLayout(new GridLayout(3, 3));
         iniciarTabla(panelJuego);
         getContentPane().add(panelJuego, BorderLayout.CENTER);
