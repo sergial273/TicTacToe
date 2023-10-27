@@ -45,7 +45,8 @@ public class TresEnRaya extends JFrame {
         panelLateral.setBackground(new Color(95, 158, 160));
         panelLateral.setLayout(new BoxLayout(panelLateral, BoxLayout.Y_AXIS));
         
-        botonNuevaPartida = new JButton("Nueva partida");
+        botonNuevaPartida = new JButton("New Game");
+        botonNuevaPartida.setAlignmentX(CENTER_ALIGNMENT);
         botonNuevaPartida.setLocation(new Point(120, 300));
         botonNuevaPartida.setMaximumSize(new Dimension(120, 23));
         botonNuevaPartida.setForeground(new Color(95, 158, 160));
@@ -53,26 +54,35 @@ public class TresEnRaya extends JFrame {
         etiqueta1 = new JLabel("ESTO ES EL TE");
         etiqueta1.setForeground(new Color(224, 255, 255));
         etiqueta1.setFont(new Font("Tempus Sans ITC", Font.BOLD, 14));
+        etiqueta1.setAlignmentX(CENTER_ALIGNMENT);
+        etiqueta1.setMinimumSize(new Dimension(200,30));
+        etiqueta1.setPreferredSize(new Dimension(200,30));
+        etiqueta1.setMaximumSize(new Dimension(200,30));
         etiqueta2 = new JLabel("Jugador 1");
         etiqueta2.setAlignmentX(Component.RIGHT_ALIGNMENT);
         etiqueta2.setForeground(new Color(255, 255, 255));
         etiqueta2.setFont(new Font("Tempus Sans ITC", Font.BOLD, 14));
+        etiqueta2.setAlignmentX(CENTER_ALIGNMENT);
         etiqueta3 = new JLabel("Nombre");
         etiqueta3.setForeground(new Color(255, 255, 255));
         etiqueta3.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 11));
+        etiqueta3.setAlignmentX(CENTER_ALIGNMENT);
         etiqueta5 = new JLabel("Jugador 2");
         etiqueta5.setAlignmentX(Component.RIGHT_ALIGNMENT);
         etiqueta5.setForeground(new Color(240, 255, 255));
         etiqueta5.setFont(new Font("Tempus Sans ITC", Font.BOLD, 14));
+        etiqueta5.setAlignmentX(CENTER_ALIGNMENT);
         etiqueta6 = new JLabel("Nombre");
         etiqueta6.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 11));
         etiqueta6.setForeground(new Color(255, 255, 255));
+        etiqueta6.setAlignmentX(CENTER_ALIGNMENT);
         campoTexto2 = new JTextField();
         campoTexto2.setMaximumSize(new Dimension(400, 150));
         etiqueta7 = new JLabel("Tipo");
         etiqueta7.setAlignmentX(Component.RIGHT_ALIGNMENT);
         etiqueta7.setForeground(new Color(255, 255, 255));
         etiqueta7.setFont(new Font("Tempus Sans ITC", Font.BOLD, 15));
+        etiqueta7.setAlignmentX(CENTER_ALIGNMENT);
         radioHumano2 = new JRadioButton("Humano",true);
         radioHumano2.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 11));
         radioHumano2.setForeground(new Color(240, 255, 240));
@@ -120,11 +130,14 @@ public class TresEnRaya extends JFrame {
         campoTexto1.setMaximumSize(new Dimension(400, 150));
         campoTexto1.setAlignmentY(1.0f);
         
-        etiqueta1.setText(campoTexto1.getText()+ ", coloca ficha...");
+        String nom = campoTexto1.getText();
+		nom = nom.substring(0, Math.min(nom.length(), 7));
+		etiqueta1.setText(nom+ ", coloca ficha...");
         panelLateral.add(campoTexto1);
         
         editorPane = new JEditorPane();
         editorPane.setBackground(new Color(95, 158, 160));
+        editorPane.setEditable(false);
         panelLateral.add(editorPane);
         panelLateral.add(etiqueta5);
         panelLateral.add(etiqueta6);
@@ -247,10 +260,14 @@ public class TresEnRaya extends JFrame {
 	private boolean haGanado(String turno1) {
 		
 		if(turno.equals("X")) {
-			etiqueta1.setText(campoTexto2.getText()+ ", coloca ficha...");
+			String nom = campoTexto2.getText();
+			nom = nom.substring(0, Math.min(nom.length(), 7));
+			etiqueta1.setText(nom+ ", coloca ficha...");
 		}
 		else {
-			etiqueta1.setText(campoTexto1.getText()+ ", coloca ficha...");
+			String nom = campoTexto1.getText();
+			nom = nom.substring(0, Math.min(nom.length(), 7));
+			etiqueta1.setText(nom+ ", coloca ficha...");
 		}
 		
 		// Comprobar filas
@@ -296,7 +313,9 @@ public class TresEnRaya extends JFrame {
 	
 	private void reiniciarPartida() {
 		turno = "O";
-		etiqueta1.setText(campoTexto1.getText()+ ", coloca ficha...");
+		String nom = campoTexto1.getText();
+		nom = nom.substring(0, Math.min(nom.length(), 7));
+		etiqueta1.setText(nom+ ", coloca ficha...");
 		for (int fila = 0; fila < 3; fila++) {
 			for (int col = 0; col < 3; col++) {
 				tablero[fila][col].setText("");
