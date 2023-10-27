@@ -39,7 +39,6 @@ public class TresEnRaya extends JFrame {
     private JLabel lblNewLabel;
     private JLabel lblNewLabel2;
     private JLabel lblNewLabel3;
-    private JLabel lblNewLabel4;
     
 	public TresEnRaya() {
 		setTitle("TicTacToe");
